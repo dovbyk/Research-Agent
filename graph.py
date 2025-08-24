@@ -54,7 +54,7 @@ def generate_query(state: OverallState, config: RunnableConfig) -> QueryGenerati
     Returns:
         Dictionary with state update, including search_query key containing the generated queries
     """
-    configurable = Configuration.from_runnable_config(config)
+    configurable = Configuration.from_runnable_config(config) #This class method creates an instance of Configuration class and stores in configurable 
 
     # check for custom initial search query count
     if state.get("initial_search_query_count") is None:
@@ -67,8 +67,8 @@ def generate_query(state: OverallState, config: RunnableConfig) -> QueryGenerati
         max_retries=2,
         api_key=os.getenv("GEMINI_API_KEY"),
     )
-    structured_llm = llm.with_structured_output(SearchQueryList)
-
+    structured_llm = llm.with_structured_output(SearchQueryList) #a Langchain method that structures the LLM response acc to given schema format
+                                                                #This method will return an instance of Runnable class
     # Format the prompt
     current_date = get_current_date()
     formatted_prompt = query_writer_instructions.format(
@@ -77,8 +77,8 @@ def generate_query(state: OverallState, config: RunnableConfig) -> QueryGenerati
         number_queries=state["initial_search_query_count"],
     )
     # Generate the search queries
-    result = structured_llm.invoke(formatted_prompt)
-    return {"search_query": result.query}
+    result = structured_llm.invoke(formatted_prompt) #Due to the use of with_structured_output(), the LLM wlll produce output in given schema format
+    return {"search_query": result.query}            #The invoke() method returns response as the object of given schema(SearchQueryList) and then we accessed result.query filed of that object
 
 
 def continue_to_web_research(state: QueryGenerationState):
@@ -169,7 +169,7 @@ def reflection(state: OverallState, config: RunnableConfig) -> ReflectionState:
         max_retries=2,
         api_key=os.getenv("GEMINI_API_KEY"),
     )
-    result = llm.with_structured_output(Reflection).invoke(formatted_prompt)
+    result = llm.with_structured_output(Reflection).invoke(formatted_prompt) #This "result" will be the output of LLM structured with "Reflection" schema
 
     return {
         "is_sufficient": result.is_sufficient,
