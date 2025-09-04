@@ -17,12 +17,12 @@ app.add_middleware(
 @app.post("/ask")
 async def ask_agent(request: str):
     try:
-        state = (
+        state = {
             "messages": [{"role": "user", "content": request }], 
             "search_query": [], #need to pass them to avoid KeyError
             "web_research_result": [],
             "sources_gathered": []
-        )
+        }
 
         result = graph.invoke(state, config=RunnableConfig)
         return {
