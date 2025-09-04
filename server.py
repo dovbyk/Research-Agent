@@ -29,7 +29,7 @@ async def ask_agent(request: QueryRequest):
             "sources_gathered": []
         }
 
-        result = graph.invoke(state, config=RunnableConfig)
+        result = graph.invoke(state, config=RunnableConfig()) #should instantiate with () otherwise we get error
         return {
             "answer": result["messages"][-1].content, #-1 because, the last one contains ai response
             "sources": result.get("sources_gathered", [])
