@@ -1,5 +1,6 @@
 import os
 from fastapi import FastAPI
+from pydantic import BaseModel
 from langchain_core.runnables import RunnableConfig
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -14,11 +15,15 @@ app.add_middleware(
     allow_headers = ["*"]
 )
 
+class QueryRequest(BaseModel): #Tried sending just plain text as request but didnt work, had to create this class
+    query: str
+
+
 @app.post("/ask")
-async def ask_agent(request: str):
+async def ask_agent(request: QueryRequest):
     try:
         state = {
-            "messages": [{"role": "user", "content": request }], 
+            "messages": [{"role": "user", "content": request.query }], 
             "search_query": [], #need to pass them to avoid KeyError
             "web_research_result": [],
             "sources_gathered": []
