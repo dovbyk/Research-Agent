@@ -1,7 +1,7 @@
 import os
 from fastapi import FastAPI
 from langchain_core.runnables import RunnableConfig
-form fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 
 from graph import graph
 app = FastAPI()
