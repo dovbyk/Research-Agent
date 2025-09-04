@@ -4,6 +4,6 @@ python-dotenv
 langchain
 langgraph
 langchain-google-genai
-google-geneai
+google-genai
 requests
 pydantic
