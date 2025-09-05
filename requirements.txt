@@ -7,6 +7,5 @@ langchain-google-genai
 google-genai
 requests
 pydantic
-streamlit
-httpx
+
 
