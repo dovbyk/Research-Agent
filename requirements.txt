@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+python-dotenv
+langchain
+langgraph
+langchain-google-genai
+google-genai
+requests
+pydantic
+langgraph-api
+langgraph-cli
