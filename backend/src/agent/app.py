@@ -2,10 +2,18 @@
 import pathlib
 from fastapi import FastAPI, Response
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 
 # Define the FastAPI app
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],        # Allows requests from your frontend domains
+    allow_credentials=True,       # Allows cookies/headers if needed
+    allow_methods=["*"],          # Allows all HTTP methods (GET, POST, OPTIONS, etc.)
+    allow_headers=["*"],          # Allows all headers
+)
 
 def create_frontend_router(build_dir="../frontend/dist"):
     """Creates a router to serve the React frontend.
