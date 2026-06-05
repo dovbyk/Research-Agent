@@ -29,7 +29,7 @@ interface FinalizeAnswerUpdate {
   };
 }
 
-const DEPLOYMENT_URL = "http://127.0.0.1:2024";
+const DEPLOYMENT_URL = "https://research-agent-backend-n1t4.onrender.com"; //Backend api url
 const client = new Client({ apiUrl: DEPLOYMENT_URL });
 const generateId = () => Math.random().toString(36).substring(2, 15);
 
